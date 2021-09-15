@@ -9,11 +9,13 @@ Include another function called toString which returns:
 Replace the text inside [ ] with the appropriate values.
 Create two objects of this class and output toString to the console.log() to demonstrate it working. */
 
-class Photo {
+
+
+export class Photo {
   constructor(width = 8, height = 10) {
     this.width = width;
     this.height = height;
-  }
+  }  
 
   price() {
     let finalPrice;
@@ -32,18 +34,41 @@ class Photo {
   }
 
   toString() {
-    return `This is a ${this.width} by ${this.height} photo and it costs ${this.price()}`;
+    return `This is a ${this.width} by ${this.height} photo and it costs $${this.price()}`;
   }
 }
 
-let photo1 = new Photo(8, 10);
-console.log(photo1.toString());
+export class MattedPhoto extends Photo{
+  constructor(width, height, color){
+    super(width, height)
+    this.color = color;
+  } 
 
-let photo2 = new Photo(10, 12);
-console.log(photo2.toString());
+  price() { //added from solution
+    const mattedPrice = 10;
+    return super.price() + mattedPrice;
+  }
 
-let photo3 = new Photo(20, 30);
-console.log(photo3.toString());
+    toString(){
+      return `This is a ${this.width} by ${this.height} matted ${this.color} photo and it costs $${this.price()}`;
+  }
+}
 
-let photo4 = new Photo(55, 77);
-console.log(photo4.toString());
+
+export class FramedPhoto extends Photo {
+    
+  constructor(width, height, material, style){
+      super(width, height);
+      this.material = material;
+      this.style = style;
+  }
+
+  price() {
+      const framedPrice = 25;
+      return super.price() + framedPrice;
+  }
+  
+  toString(){
+      return `This is a ${this.width} by ${this.height} ${this.material} framed photo. The style is ${this.style} and it costs $${this.price()}`;
+  }
+}
